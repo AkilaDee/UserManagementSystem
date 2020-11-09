@@ -110,7 +110,7 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException{
+			throws SQLException, IOException{
 		int id = Integer.parseInt(request.getParameter("id"));
 		userDAO.deleteUser(id);
 		response.sendRedirect("list");

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import net.javaguides.usermanagement.model.User;
 
 public class UserDAO {
-	private String jdbcURL= "jdbc:mysql://localhost:3306/javapro?useSSL=false";
+	private String jdbcURL= "jdbc:mysql://localhost:3306/servlet";
 	private String jdbcUsername="root";
-	private String jdbcPassword="root";
+	private String jdbcPassword="";
 	
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" +"(name,email,country) VALUES" +"(?,?,?);";
 	private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id=?";
