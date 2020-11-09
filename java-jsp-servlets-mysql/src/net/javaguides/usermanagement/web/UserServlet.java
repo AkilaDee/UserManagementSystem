@@ -43,33 +43,35 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getServletPath();
+		System.out.println("Action"+action);
 		
 		switch(action) {
-		case "/new " :
+		case "/new" :
 			showNewForm(request,response);
 			break;
-		case "/ insert " :
+		case "/insert" :
 			try {
+				System.out.println("Inser user");
 				insertUser(request, response);
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 			break;
-		case "/delete " :
+		case "/delete" :
 			try {
 				deleteUser(request, response);
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 			break;
-		case "/edit " :
+		case "/edit" :
 			try {
 				showEditForm(request, response);
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 			break;
-		case "/update " :
+		case "/update" :
 			try {
 				updateUser(request, response);
 			}catch (SQLException e) {
@@ -80,7 +82,7 @@ public class UserServlet extends HttpServlet {
 			try {
 				listUser(request , response);
 			}catch (SQLException e){
-				e.printStackTrace();
+				System.out.println("hsbdjb");
 			}
 			break;
 		}
@@ -105,7 +107,7 @@ public class UserServlet extends HttpServlet {
 		String country = request.getParameter("country");
 		
 		User user = new User(id,name,email,country);
-		userDAO.insertUser(user);
+		userDAO.updateUser(user);
 		response.sendRedirect("List");
 	}
 	
@@ -141,7 +143,9 @@ public class UserServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String country = request.getParameter("country");
 		User newUser = new User(name,email,country);
+		System.out.println("Insertingne user"+name+email+country);
 		userDAO.insertUser(newUser);
+		System.out.println("Inserted user");
 		response.sendRedirect("List");
 	}
 	

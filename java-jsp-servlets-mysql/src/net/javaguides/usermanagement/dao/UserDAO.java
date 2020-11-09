@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import net.javaguides.usermanagement.model.User;
 
 public class UserDAO {
-	private String jdbcURL= "jdbc:mysql://localhost:3306/servlet";
+	private String jdbcURL= "jdbc:mysql://localhost:3306/demo?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private String jdbcUsername="root";
 	private String jdbcPassword="";
 	
@@ -26,7 +26,7 @@ public class UserDAO {
 		Connection connection = null;
 		
 		try {
-			Class.forName("com.myql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(jdbcURL,jdbcUsername,jdbcPassword);
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -38,13 +38,14 @@ public class UserDAO {
 		
 	}
 	public void insertUser(User user) {
-		try (Connection connection = getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)){
+		try {
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL);
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2,user.getEmail());
 			preparedStatement.setString(3,user.getCountry());
 			preparedStatement.executeUpdate();
-			
+			System.out.println("Inserted");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -89,9 +90,9 @@ public class UserDAO {
 	public List<User> selectAllUsers() {
 		List<User> users= new ArrayList<>();
 		
-		try(Connection connection = getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);){
-			
+		try{
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);
 			System.out.println(preparedStatement);
 			
 			ResultSet rs = preparedStatement.executeQuery();
