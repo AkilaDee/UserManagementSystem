@@ -1,4 +1,4 @@
-# usermanagement-java
+# UserManagement System - java
 
 A simple java web application to manage users.
 manages a collection of users with the basic CRUD operations.List,Insert,Update,Delete.
